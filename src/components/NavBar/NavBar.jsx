@@ -1,43 +1,61 @@
 import React from "react";
+import { Link, NavLink } from 'react-router-dom';
+import { Fragment } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { uiActions } from "../../store/ui-slice";
+
 import './NavBar.less';
-import { Link } from 'react-router-dom';
 
 function NavBar() {
+    const userLoggedIn = useSelector(state => state.user.userLoggedIn);
+    const dispatch = useDispatch();
+
+    const toggleLogin = () => {
+        dispatch(uiActions.toggleLogin());
+    }
+
     return (
-        <nav>
-            <ul>
-                <li>
-                    <Link to="/">
-                        home
+        <Fragment>
+            <nav>
+                <h1>
+                    <Link to='/'>
+                        Pearly Pets
                     </Link>
-                </li>
-                <li>
-                    <Link to="/about">
-                        about
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/contact">
-                        contact
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/login">
-                        login
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/pets">
-                        pets
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/resources">
-                        resources
-                    </Link>
-                </li>
-            </ul>
-        </nav>
+                </h1>
+                <ul>
+                    <li>
+                        <NavLink to='/'>
+                            Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/about'>
+                            About
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/contact'>
+                            Contact
+                        </NavLink>
+                    </li>
+                    <li>
+                        <button onClick={toggleLogin}>
+                            {userLoggedIn ? 'Logout' : 'Login'}
+                        </button>
+                    </li>
+                    <li>
+                        <NavLink to='/pets'>
+                            Adopt!
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/resources'>
+                            Resources
+                        </NavLink>
+                    </li>
+                </ul>
+            </nav>
+        </Fragment>
     )
 }
 
