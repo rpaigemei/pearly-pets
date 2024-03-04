@@ -12,6 +12,7 @@ import Pets from './pages/Pets/Pets';
 import Resources from './pages/Resources/Resources';
 import Notification from './components/Notification/Notification';
 
+import './pages/pages.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,7 +32,6 @@ function App() {
 
   return (
     <Fragment>
-      {showLogin && <Login />}
       {notification && <Notification status={notification.status} title={notification.title} message={notification.message}></Notification>}
       <Routes>
         <Route path='/' element={<Home />} />
@@ -40,6 +40,9 @@ function App() {
         <Route path='/pets' element={<Pets />} />
         <Route path='/resources' element={<Resources />} />
       </Routes>
+      <div className='login-outer'>
+        {showLogin && <Login />}
+      </div>
     </Fragment>
   );
 }

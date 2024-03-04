@@ -6,8 +6,7 @@ import { Fragment, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticateUser, closeLogin, logout } from "../../auth/auth";
 
-import './Login.less';
-import NavBar from "../NavBar/NavBar";
+import './Login.css';
 
 const portalElement = document.getElementById('overlays');
 
@@ -61,7 +60,14 @@ const Login = () => {
 
     return (
         <Fragment>
-            Login
+            <div className="login">
+                <h1>
+                   Login 
+                </h1>
+                <h2>
+                    This is the login popup. Users will be able to enter in their email and password to login. They will also be able to switch to signup.
+                </h2>
+            </div>
         </Fragment>
     )
 }
