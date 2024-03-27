@@ -1,4 +1,4 @@
-import { Button } from "bootstrap";
+import { Button } from "react-bootstrap";
 
 const PAGINATION_PER_PAGE = 5;
 
