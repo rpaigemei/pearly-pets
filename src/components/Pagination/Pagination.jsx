@@ -1,5 +1,3 @@
-import { Button } from "react-bootstrap";
-
 const PAGINATION_PER_PAGE = 5;
 
 function Pagination({ currentPage, totalPages, getNextPage }) {
@@ -12,9 +10,9 @@ function Pagination({ currentPage, totalPages, getNextPage }) {
     return (
         <div>
             <div>
-                <Button onClick={() => { currentPage > 1 && getNextPage(+currentPage - 1)}}>
+                <div onClick={() => { currentPage > 1 && getNextPage(+currentPage - 1)}}>
                     left
-                </Button>
+                </div>
             </div>
             <div key={0} onClick={() => { currentPage != 1 && getNextPage(1) }}>
                 {1}
