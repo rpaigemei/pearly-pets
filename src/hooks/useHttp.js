@@ -1,5 +1,5 @@
 /* Credit to https://github.com/jismonthomas/petfinder-react */
-import { useCallback, useEffect, useState, useTransition } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 
 const useHttp = () => {
@@ -16,7 +16,7 @@ const useHttp = () => {
         if (localUserItems) {
             const parsedLocalUserItems = JSON.parse(localUserItems);
 
-            useToken = parsedLocalUserItems.token;
+            userToken = parsedLocalUserItems.token;
             userTokenExpiry = parsedLocalUserItems.tokenExpiry;
         }
     }, []);
@@ -52,7 +52,7 @@ const useHttp = () => {
 
             return data.access_token;
         }
-        catch {
+        catch (error) {
             setError(error.message)
         }
     }
