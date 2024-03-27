@@ -105,7 +105,7 @@ export const authenticateUser = (enteredEmail, enteredPassword, register) => {
             const userID = data.localID;
             const token = data.idToken;
 
-            console.log('Login TOken Expiry at: ', new Date(loginTokenExpiry).toLocaleTimeString("en-US"));
+            console.log('Login Token Expiry at: ', new Date(loginTokenExpiry).toLocaleTimeString("en-US"));
 
             const savedUserFavorites = await getUserFavorites(userID);
 
@@ -117,6 +117,14 @@ export const authenticateUser = (enteredEmail, enteredPassword, register) => {
             dispatch(userActions.setUserFavorites(savedUserFavorites));
 
             localStorage.setItem('favoritePets', JSON.stringify(savedUserFavorites));
+
+            localStorage.setItem('petfinderUser',
+                JSON.stringify({
+                    token: token,
+                    tokenExpiry: loginTokenExpiry,
+                    id: userID
+                })
+            );
 
             const remainingTime = calculateRemainingTime(loginTokenExpiry);
 

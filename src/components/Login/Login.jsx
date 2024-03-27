@@ -1,16 +1,17 @@
 /* Credit to https://github.com/jismonthomas/petfinder-react */
 import React from "react";
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 
-import { Fragment, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { authenticateUser, closeLogin, logout } from "../../auth/auth";
+import { Fragment, /*useRef, useState*/ } from "react";
+//import { useDispatch, useSelector } from "react-redux";
+//import { authenticateUser, closeLogin, logout } from "../../auth/auth";
 
 import './Login.css';
 
-const portalElement = document.getElementById('overlays');
+//const portalElement = document.getElementById('overlays');
 
 const Login = () => {
+    /*
     const [register, setRegister] = useState(false);
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
@@ -57,6 +58,7 @@ const Login = () => {
 
         dispatch(authenticateUser(enteredEmail, enteredPassword, register));
     }
+    */
 
     return (
         <Fragment>

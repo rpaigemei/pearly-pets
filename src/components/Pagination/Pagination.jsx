@@ -14,23 +14,23 @@ function Pagination({ currentPage, totalPages, getNextPage }) {
                     left
                 </div>
             </div>
-            <div key={0} onClick={() => { currentPage != 1 && getNextPage(1) }}>
+            <div key={0} onClick={() => { currentPage !== 1 && getNextPage(1) }}>
                 {1}
             </div>
             {currentPage > PAGINATION_PER_PAGE && <div>...</div>}
 
             {currentPaginationGroup.map(page => {
                 return (
-                    <div key={page} onClick={() => { currentPage != page && getNextPage(page) }}>
+                    <div key={page} onClick={() => { currentPage !== page && getNextPage(page) }}>
                         {page}
                     </div>
                 )
             })}
 
-            {lastIndex != totalPages - 1 && <div>...</div>}
+            {lastIndex !== totalPages - 1 && <div>...</div>}
 
             {totalPages > 1 &&
-                <div key={totalPages} onClick={() => {currentPage != totalPages && getNextPage(totalPages) }}>
+                <div key={totalPages} onClick={() => {currentPage !== totalPages && getNextPage(totalPages) }}>
                     {totalPages}
                 </div>
             }
