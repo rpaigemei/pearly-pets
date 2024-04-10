@@ -12,10 +12,12 @@ import Resources from './pages/Resources/Resources';
 import Favorites from './pages/Favorites/Favorites';
 
 import './pages/pages.css';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 function App() {
   return (
     <Fragment>
+      <ScrollToTop />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
