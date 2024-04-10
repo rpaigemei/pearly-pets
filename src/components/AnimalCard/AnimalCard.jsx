@@ -1,20 +1,14 @@
-import { Link } from "react-router-dom";
+import React from "react";
 
-function AnimalCard({ loading, pet, petID, image, name, breeds, age, gender, distance }) {
+import placeholder from "../../images/placeholder.jpeg"
+
+import "./AnimalCard.css";
+import API from "../../api/API";
+
+function AnimalCard() {
     return (
         <div>
-            <Link to={`/{pet}/${petID}`}>
-                <div>
-                    <image src={image} alt={name}/>
-                </div>
-                <div>
-                    <p>{name}</p>
-                    <p>{breeds}</p>
-                    <p>{age}</p>
-                    <p>{gender}</p>
-                    <p>{distance}</p>
-                </div>
-            </Link>
+            animal card here
         </div>
     );
 }

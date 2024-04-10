@@ -1,25 +1,57 @@
-import React from "react";
-import { Link, NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Fragment } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { uiActions } from "../../store/ui-slice";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
-import sophie from "../../images/sophie.png";
+import { FaBars, FaTimes, FaUserCircle, FaHeart, FaSignOutAlt} from "react-icons/fa";
+
+import pearlyPetsLogo from "../../images/pearlyPetsLogo.png";
 import './NavBar.css';
 
 function NavBar() {
-    const userLoggedIn = useSelector(state => state.user.userLoggedIn);
-    const dispatch = useDispatch();
+    const [sideMenuOpen, setSideMenuOpen] = useState(false);
+    const [loggedIn, setIsLoggedIn] = useState(false);
 
-    const toggleLogin = () => {
-        dispatch(uiActions.toggleLogin());
+    function toggleSideMenu() {
+        setSideMenuOpen(!sideMenuOpen);
+    }
+
+    const [logoutDropdownOpen, setLogoutDropdownOpen] = useState(false);
+
+    function toggleLogoutDropdown() {
+        setLogoutDropdownOpen(!logoutDropdownOpen);
+    }
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setIsLoggedIn(true);
+            }
+            else {
+                setIsLoggedIn(false);
+            }
+        })
+    })
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        signOut(auth)
+            .then(() => {
+                navigate('/');
+                toggleLogoutDropdown();
+            })
+            .catch ((error) => {
+                console.log("an error has occurred signing out");
+            })
     }
 
     return (
         <Fragment>
             <nav className="navBar">
                 <NavLink to='/'>
-                    <img src={sophie} alt="sophie" className="logo" />
+                    <img src={pearlyPetsLogo} alt="pearly pets logo" className="logo" />
                 </NavLink>
                 <h1>
                     <Link to='/'>
@@ -27,40 +59,75 @@ function NavBar() {
                     </Link>
                 </h1>
                 <div className="menu">
-                    <ul className="list">
+                    {loggedIn ?
+                        <div>
+                            <button className="loggedInPrompt" onClick={toggleLogoutDropdown}>
+                                <FaUserCircle className="userIcon"/>
+                                Hello!
+                            </button>
+                            {logoutDropdownOpen ? 
+                                <ul className="dropdown">
+                                    <li className="dropdownItem">
+                                        <NavLink to="/favorites" className="favorites">
+                                            <FaHeart className="dropdownIcon" />
+                                            Favorites
+                                        </NavLink>
+                                    </li>
+                                    <li className="dropdownItem">
+                                        <button className="logoutDropdownButton" onClick={handleLogout}>
+                                            <FaSignOutAlt className="dropdownIcon" />
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                                :
+                                null
+                            }
+                        </div> 
+                        :
+                        <NavLink to="/login" className="loginPrompt">
+                            <FaUserCircle className="userIcon"/>
+                            Login
+                        </NavLink>
+                    }
+                    <div onClick={toggleSideMenu}>
+                        <FaBars className="openMenuIcon"/>
+                    </div>
+                </div>
+            </nav>
+            <div className={`sideBarMenu ${sideMenuOpen ? 'sideBarMenuActive' : null}`}>
+                    <div className="closeMenuIconContainer" onClick={toggleSideMenu}>
+                        <FaTimes className="closeMenuIcon"/>
+                    </div>
+                    <ul>
                         <li className="item">
-                            <NavLink to='/'>
+                            <NavLink to='/' onClick={toggleSideMenu}>
                                 Home
                             </NavLink>
                         </li>
-                        <li className="item">
+                        <li className="item" onClick={toggleSideMenu}>
                             <NavLink to='/about'>
                                 About
                             </NavLink>
                         </li>
-                        <li className="item">
+                        <li className="item" onClick={toggleSideMenu}>
                             <NavLink to='/pets'>
                                 Adopt!
                             </NavLink>
                         </li>
-                        <li className="item">
+                        <li className="item" onClick={toggleSideMenu}>
                             <NavLink to='/resources'>
                                 Resources
                             </NavLink>
                         </li>
-                        <li className="item">
+                        <li className="item" onClick={toggleSideMenu}>
                             <NavLink to='/contact'>
                                 Contact
                             </NavLink>
                         </li>
-                        <li className="item">
-                            <button className="button" onClick={toggleLogin}>
-                                {userLoggedIn ? 'Logout' : 'Login'}
-                            </button>
-                        </li>
                     </ul>
                 </div>
-            </nav>
+                <div className={`${sideMenuOpen ? 'overlay' : null}`} onClick={toggleSideMenu}></div>
         </Fragment>
     )
 }

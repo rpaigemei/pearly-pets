@@ -1,0 +1,131 @@
+.background {
+    height: 80vh;
+    width: 100%;
+    
+    background-image: url('../../images/paws.png');
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formContainer {
+    height: auto;
+    width: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #fffcf2;
+    border: 10px double #414833;
+
+    padding: 30px 60px 10px 60px;
+
+    form {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-family: 'Prata', serif;
+        font-size: 30px;
+        color: #414833;
+
+        margin-bottom: -10px;
+    }
+
+    .formInput {
+        width: 100%;
+
+        .loginIcon {
+            position: absolute;
+
+            font-size: 18px;
+            color: #414833;
+            padding: 10px;
+        }
+
+        input[type=email],
+        input[type=password] {
+            height: 20px;
+            width: 100%;
+
+            margin-bottom: 20px;
+            padding: 10px 10px 10px 40px;
+            
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            color: #414833;
+
+            border: none;
+            background-color: #c2c5aa;
+
+            transition: all .25s;
+        }
+
+        input::placeholder {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 14px;
+            color:#414833d0;
+        }
+
+        input[type=email]:focus,
+        input[type=password]:focus {
+            outline: none;
+            background-color: #e2e5ca;
+        }
+    }
+
+    .buttonContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button[type=submit] {
+            width: 90px;
+            height: auto;
+            
+            margin-top: 10px;
+            margin-bottom: 15px;
+            padding: 10px 0 10px 0;
+        
+            border: none;
+            background-color: #414833;
+        
+            font-family: 'Open Sans', sans-serif;
+            color: #fffcf2;
+            font-size: 16px;
+
+            transition: all .35s;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #c2c5aa;
+                color: #414833;
+                box-shadow: #0000003d 0px 3px 8px;
+            }
+        }
+    }
+    
+    p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        color: #414833;
+
+        margin-bottom: 30px;
+
+        a:link {
+            color: #a4ac86;
+            transition: all .25s;
+        } 
+        a:visited { 
+            color: #a4ac86;
+            transition: all .25s;
+        } 
+        a:hover { 
+            color: #c2c5aa;
+        }
+    }
+}

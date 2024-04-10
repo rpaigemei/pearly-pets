@@ -1,58 +1,40 @@
 .navBar {
-    padding: 10px;
     padding-left: 20px;
-    padding-right:20px;
-
-    font-family: 'Trebuchet MS';
-    font-size: 18px;
+    padding-right: 20px;
 
     display: flex;
     align-items: center;
 
-    background-color: #cea2a2;
-    box-shadow: 0 2px 5px 0 rgb(127, 107, 107);
-
     h1 {
-        color: rgb(95, 52, 52);
+        font-family: 'Prata', serif;
+        font-style: normal;
+        font-size: 34px;
+        color: #414833;
         font-weight: bold;
     }
 
     a:link { 
         text-decoration: none; 
-        color: rgb(95, 52, 52);
+        color: #414833;
+        transition: all 0.25s;
     } 
     a:visited { 
         text-decoration: none; 
-        color: rgb(95, 52, 52);
+        color: #414833;
+        transition: all 0.25s;
     } 
     a:hover { 
         text-decoration: none;
-        color: rgb(155, 102, 102);
+        color: #656d4a;
     } 
     a:active { 
         text-decoration: none;
-        color: rgb(95, 52, 52);
-    }
-
-    .button {
-        background: none;
-        border: none;
-
-        margin:0;
-        padding:0;
-
-        font-family: 'Trebuchet MS';
-        font-size: 18px;
-        color: rgb(95, 52, 52);
-    }
-
-    .button:hover {
-        cursor: pointer;
-        color: rgb(155, 102, 102);
+        color: #414833;
+        transition: all 0.25s;
     }
 
     .logo {
-        margin-right: 10px;
+        margin-right: 20px;
         border-radius: 100%;
         
         max-width: 75px;
@@ -66,13 +48,235 @@
     margin-left: auto;
     margin-right: 0;
 
-    .list {
-        display: flex;
+    display: flex;
+    flex-direction: row;
+}
+
+.openMenuIcon {
+    font-size: 32px;
+    color: #414833;
+
+    transition: all 0.25s;
+
+    cursor: pointer;
+}
+
+.openMenuIcon:hover {
+    color: #656d4a;
+}
+
+.loggedInPrompt {
+    text-align: right;
+    font-family: 'Open Sans';
+    font-size: 20px;
+    font-weight: bold;
+    color: #414833;
+
+    background: none;
+    border: none;
+
+    margin-right: 30px;
+
+    &:hover {
+        cursor: pointer;
+        color: #656d4a;
     }
+}
+
+.dropdown {
+    position: absolute;
+    background-color: #c2c5aa;
+    border-radius: 5px;
+    box-shadow: #0000003d 0px 3px 8px;
+    padding: 25px 20px 25px 20px;
+
+    .dropdownItem {
+        list-style-type: none;
+        text-align: left;
+
+        .favorites {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            color: #414833;
+
+            transition: all 0.25s;
+        }
+
+        .logoutDropdownButton {
+            background: none;
+            border: none;
+            padding: 0;
+
+            font-family: 'Open Sans', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            color: #414833;
+
+            margin-top: 10px;
+
+            transition: all 0.25s;
+        }
+
+        .dropdownIcon {
+            margin-right: 10px;
+        }
+        
+        &:hover .logoutDropdownButton{
+            cursor: pointer;
+            color:#656d4a
+        }
+
+        &:hover .favorites{
+            cursor: pointer;
+            color:#656d4a
+        }
+    }
+}
+
+.dropdown::before {
+    content: "";
+    position: absolute;
+    right: 109px;
+    top: -9px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent #c2c5aa transparent;
+}
+
+.userIcon {
+    font-size: 30px;
+    color: #414833;
+
+    margin-right: 5px;
+    vertical-align: bottom;
+
+    transition: all 0.25s;
+}
+
+.loginPrompt {
+    font-family: 'Open Sans';
+    font-size: 20px;
+    font-weight: bold;
+
+    margin-right: 30px;
+    vertical-align: bottom;
+
+    transition: all 0.25s;
+}
+
+.loginPrompt:hover .userIcon {
+    color: #656d4a;
+}
+
+.loggedInPrompt:hover .userIcon {
+    color: #656d4a;
+}
+
+.logoutButton {
+    background: none;
+    border: none;
+    padding: 0;
+
+    text-align: right;
+    font-family: 'Open Sans';
+    font-size: 20px;
+    font-weight: bold;
+    color: #fffcf2;
+
+    transition: all .25s;
+
+    &:hover {
+        cursor: pointer;
+        color: #656d4a;
+    }
+}
+
+.closeMenuIconContainer {
+    display: flex;
+    justify-content: end;
+
+    padding-top: 30px;
+    padding-right: 20px;
+}
+
+.closeMenuIcon {
+    font-size: 32px;
+    color: #fffcf2;
+
+    transition: all .25s;
+}
+
+.closeMenuIcon:hover {
+    cursor: pointer;
+    color: #a4ac86;
+}
+
+.sideBarMenu {
+    position: fixed;
+    width: 25%;
+    height: 100%;
+    
+    opacity: 0;
+
+    right: 0;
+    top: 0;
+
+    z-index: 3;
+
+    transform: translateX(200%);
+    transition-duration: 0.2s;
+    
+    background-color: #414833;
      
     .item {
         list-style-type: none;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-top: 10px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+
+        text-align: right;
+        font-family: 'Open Sans';
+        font-size: 20px;
+        font-weight: bold;
     }
+
+    a:link { 
+        text-decoration: none; 
+        color: #fffcf2;
+        transition: all .25s;
+    } 
+    a:visited { 
+        text-decoration: none; 
+        color: #fffcf2;
+        transition: all .25s;
+    } 
+    a:hover { 
+        text-decoration: none;
+        color: #a4ac86;
+    } 
+    a:active { 
+        text-decoration: none;
+        color: #fffcf2;
+        transition: all .25s;
+    }
+}
+
+.sideBarMenuActive {
+    opacity: 1;
+
+    transform: translateX(0%);
+    transition-duration: 0.2s;
+}
+
+.overlay {
+    position: fixed; 
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.5);
 }

@@ -1,0 +1,119 @@
+.card {
+    position: relative;
+    background-color: #414833;
+
+    height: 400px;
+    width: 300px;
+
+    overflow: hidden;
+
+    margin: 20px;
+
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.5s;
+}
+
+.card:hover {
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+}
+
+.cardThumb {
+    height: 300px;
+    overflow: hidden;
+    transition: height 0.5s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardThumb .image {
+    width: auto;
+    height: 300px;
+
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.card:hover .cardThumb {
+    height: 50px;
+}
+
+.card:hover .cardThumb .image {
+    opacity: 0.6;
+    transform: scale(1.2);
+}
+
+.cardBody {
+    position: relative;
+    height: 200px;
+    transition: height 0.5s;
+
+    padding: 25px 10px 0 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card:hover .cardBody {
+    height: 300px;
+}
+
+.name {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fffcf2;
+}
+
+.description {    
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13.5px;
+    text-align: center;
+    color: #fffcf2;
+
+    margin: 15px 10px 20px 10px;
+
+    opacity: 0;
+    transform: translateY(45px);
+    transition: opacity 0.3s, transform 0.3s;
+    transition-delay: 0s;
+}
+
+.card:hover .description {
+    opacity: 1;
+    transform: translateY(0px);
+    transition-delay: 0.2s;
+}
+
+.readMore {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    color: #fffcf2;
+
+    opacity: 0;
+    transform: translateY(45px);
+    transition: opacity 0.3s, transform 0.3s;
+    transition-delay: 0s;
+
+    .icon {
+        margin-left: 10px;
+    }
+
+    &:hover {
+        color: #c2c5aa;
+    }
+}
+
+.card:hover .readMore {
+    opacity: 1;
+    transform: translateY(0px);
+    transition-delay: 0.2s;
+}
