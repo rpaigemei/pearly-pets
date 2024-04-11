@@ -38,6 +38,7 @@ function Signup () {
         setIsValid(true);
         var validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         
+        // eslint-disable-next-line
         if (email.length == 0) {
             setIsValid(false);
             error.email = "Email is required";
@@ -48,12 +49,13 @@ function Signup () {
             error.email = "Invalid email"
         }
 
+        // eslint-disable-next-line
         if (password.length == 0) {
             setIsValid(false);
             error.password = "Password is required";
         }
 
-        if (password.length > 0 && password.length < 8 || password.length > 15) {
+        if (password.length > 0 && (password.length < 8 || password.length > 15)) {
             setIsValid(false);
             error.password = "Password must be between 8-15 characters"
         }

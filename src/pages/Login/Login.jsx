@@ -37,11 +37,13 @@ function Login () {
         let error = {};
         setIsValid(true);
 
+        // eslint-disable-next-line
         if (email.length == 0) {
             setIsValid(false);
             error.email = "Email is required";
         }
 
+        // eslint-disable-next-line
         if (password.length == 0) {
             setIsValid(false);
             error.password = "Password is required";

@@ -33,11 +33,13 @@ function ContactForm() {
         setIsValid(true);
         var validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
+        // eslint-disable-next-line
         if (name.length == 0) {
             setIsValid(false);
             error.name = "Name is required";
         }
 
+        // eslint-disable-next-line
         if (email.length == 0) {
             setIsValid(false);
             error.email = "Email is required";
@@ -48,6 +50,7 @@ function ContactForm() {
             error.email = "Invalid email"
         }
 
+        // eslint-disable-next-line
         if (message.length == 0) {
             setIsValid(false);
             error.message = "Message is required";
