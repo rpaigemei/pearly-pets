@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase';
@@ -10,25 +10,71 @@ import Footer from "../../components/Footer/Footer";
 import './Login.css';
 
 function Login () {
+    const form = useRef();
+
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState({});
+    const [submitting, setSubmitting] = useState(false);
+    const [isValid, setIsValid] = useState(true);
 
-    const onLogin = (e) => {
-        e.preventDefault()
+    useEffect(() => {
+        if (isValid && submitting) {
+            finishSubmit();
+        }
+    })
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setErrors(validateInputs());
+        setSubmitting(true);
+    }
+
+    const validateInputs = () => {
+        let error = {};
+        setIsValid(true);
+
+        if (email.length == 0) {
+            setIsValid(false);
+            error.email = "Email is required";
+        }
+
+        if (password.length == 0) {
+            setIsValid(false);
+            error.password = "Password is required";
+        }
+
+        return error;
+    }
+
+    const finishSubmit = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                navigate("/")
                 console.log(user);
+
+                navigate("/")
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
+
+                resetStates();
             })
+    }
+
+    const resetStates = () => {
+        form.current.reset();
+
+        setEmail("");
+        setPassword("");
+        setErrors({});
+        setIsValid(false);
+        setSubmitting(false);
     }
     
     return (
@@ -46,7 +92,7 @@ function Login () {
                         <p>
                             Login to your account.
                         </p>
-                        <form>
+                        <form ref={form}>
                             <div className="formInput">
                                 <FaEnvelope className="loginIcon"/>
                                 <input
@@ -55,8 +101,14 @@ function Login () {
                                     type="email"
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
+                                    autoComplete="off"
                                     placeholder="Email"
                                 />
+                                {errors.email ? (
+                                    <div className="requiredMessage">
+                                        {errors.email}
+                                    </div>
+                                ) : null}
                             </div>
                             <div className="formInput">
                                 <FaLock className="loginIcon"/>
@@ -66,15 +118,26 @@ function Login () {
                                     type="password"
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
+                                    autoComplete="off"
                                     placeholder="Password"
                                 />
+                                {errors.password ? (
+                                    <div className="requiredMessage">
+                                        {errors.password}
+                                    </div>
+                                ) : null}
                             </div>
                             <div className="buttonContainer">
-                                <button type="submit" onClick={onLogin}>
+                                <button type="submit" onClick={handleSubmit}>
                                     Sign In
                                 </button>
                             </div>
-                            
+                            {!isValid ? (
+                                <div className="invalidMessage">
+                                    Invalid username and/or password <br></br>
+                                    Please try again
+                                </div>
+                            ): null}
                         </form>
                         <p>
                             No account yet? {' '}

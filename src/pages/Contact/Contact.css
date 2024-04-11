@@ -61,7 +61,7 @@
 }
 
 .contactForm {
-    height: min-content;
+    height: max-content;
     width: 100%;
 
     h3 {

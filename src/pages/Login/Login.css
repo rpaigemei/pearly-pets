@@ -128,4 +128,20 @@
             color: #c2c5aa;
         }
     }
+
+    .requiredMessage {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 12px;
+        color: #c1121f;
+
+        margin-top: -15px;
+        margin-bottom: 15px;
+    }
+
+    .invalidMessage {
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 12px;
+        color: #c1121f;
+    }
 }

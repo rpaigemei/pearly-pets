@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase';
@@ -10,25 +10,82 @@ import Footer from "../../components/Footer/Footer";
 import './Login.css';
 
 function Signup () {
+    const form = useRef();
+
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errors, setErrors] = useState({});
+    const [submitting, setSubmitting] = useState(false);
+    const [isValid, setIsValid] = useState(true);
 
-    const onSubmit = async (e) => {
-        e.preventDefault()
+    useEffect(() => {
+        if (isValid && submitting) {
+            finishSubmit();
+        }
+    })
 
-        await createUserWithEmailAndPassword(auth, email, password)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setErrors(validateInputs());
+        setSubmitting(true);
+    }
+
+    const validateInputs = () => {
+        let error = {};
+        setIsValid(true);
+        var validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        
+        if (email.length == 0) {
+            setIsValid(false);
+            error.email = "Email is required";
+        }
+        
+        if (email.length > 0 && !email.match(validEmailRegex)) {
+            setIsValid(false);
+            error.email = "Invalid email"
+        }
+
+        if (password.length == 0) {
+            setIsValid(false);
+            error.password = "Password is required";
+        }
+
+        if (password.length > 0 && password.length < 8 || password.length > 15) {
+            setIsValid(false);
+            error.password = "Password must be between 8-15 characters"
+        }
+
+        return error;
+    }
+
+    const finishSubmit = () => {
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                navigate("/login")
                 console.log(user);
+
+                navigate("/")
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
+
+                resetStates();
             })
+    }
+
+    const resetStates = () => {
+        form.current.reset();
+
+        setEmail("");
+        setPassword("");
+        setErrors({});
+        setIsValid(false);
+        setSubmitting(false);
     }
     
     return (
@@ -55,8 +112,14 @@ function Signup () {
                                     type="email"
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
+                                    autoComplete="off"
                                     placeholder="Email"
                                 />
+                                {errors.email ? (
+                                    <div className="requiredMessage">
+                                        {errors.email}
+                                    </div>
+                                ) : null}
                             </div>
                             <div className="formInput">
                                 <FaLock className="loginIcon"/>
@@ -66,15 +129,26 @@ function Signup () {
                                     type="password"
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
+                                    autoComplete="off"
                                     placeholder="Password"
                                 />
+                                {errors.password ? (
+                                    <div className="requiredMessage">
+                                        {errors.password}
+                                    </div>
+                                ) : null}
                             </div>
                             <div className="buttonContainer">
-                                <button type="submit" onClick={onSubmit}>
+                                <button type="submit" onClick={handleSubmit}>
                                     Sign Up
                                 </button>
                             </div>
-                            
+                            {!isValid ? (
+                                <div className="invalidMessage">
+                                    Invalid username and/or password <br></br>
+                                    Please try again
+                                </div>
+                            ): null}
                         </form>
                         <p>
                             Already have an account? {' '}
