@@ -1,7 +1,8 @@
-import './Search.css'
+import React, { useRef, useEffect } from "react";
+import { FaSearch } from "react-icons/fa";
 
-import React from 'react';
-import { useRef, useEffect } from "react";
+
+import './Search.css'
 
 function Search({ filterUpdate, filterText }) {
     // useRef() to allow input to be mutable for when it is being typed into the search bar
@@ -19,12 +20,12 @@ function Search({ filterUpdate, filterText }) {
 
     // Shows the input as it is typed in the search bar
     return (
-        <form>
+        <form className="petSearch">
+            <FaSearch className="petSearchIcon"/>
             <input
-                className="searchBar"
                 ref={input}
-                type="text"
-                placeholder="Search. . ."
+                type="search"
+                placeholder="Type name to search..."
                 value={filterText}
                 onChange={handleChange}
             />

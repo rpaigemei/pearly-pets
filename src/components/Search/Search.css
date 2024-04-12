@@ -1,7 +1,34 @@
-.searchBar {
-    margin-bottom: 20px;
-    font-size: 16px;
-    border-radius: 10px;
-    padding: 10px;
-    width: 100%;
+.petSearch {
+    display: flex;
+
+    .petSearchIcon {
+        position: absolute;
+        padding: 10px;
+        font-size: 22px;
+        color: #414833;
+    }
+}
+
+input[type=search] {
+    height: 50px;
+
+    padding: 10px 10px 10px 40px;
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: #414833;
+
+    border: none;
+
+    background-color: #fffcf2;
+}
+
+input[type=search]::placeholder {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color:#414833d0;
+}
+
+input[type=search]:focus {
+    outline: #414833 1px solid;
 }

@@ -38,14 +38,14 @@ form {
         background-color: #e3dfd2;
     }
     
-    input::placeholder {
+    input[type=contact]::placeholder {
         font-family: 'Open Sans', sans-serif;
         font-size: 14px;
         color:#414833d0;
     }
-    
-    input[type=contact] {
-        outline: none;
+
+    input[type=contact]:focus{
+        outline: #414833 1px solid;
     }
     
     textarea {
@@ -68,9 +68,9 @@ form {
         font-size: 14px;
         color:#414833d0;
     }
-    
+
     textarea:focus {
-        outline: none;
+        outline: #414833 1px solid;
     }
 }
 
@@ -99,6 +99,10 @@ form {
         cursor: pointer;
         background-color: #414833;
         color: #fffcf2;
+    }
+
+    input[type=submit]:focus {
+        outline: #414833 1px solid;
     }
 }
 

@@ -1,0 +1,137 @@
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #414833;
+
+    background-image: url('../../images/paws.png');
+    background-size: cover;
+
+    width: 100%;
+    height: 300px;
+
+    h1 {
+        font-family: 'Prata', serif;
+        font-weight: normal;
+        font-size: 30px;
+        color: #fffcf2;
+
+        background-color: #414833;
+        padding: 20px;
+
+        border: 10px double #fffcf2;
+        border-radius: 5px;
+    }
+}
+
+.content {
+    display: flex;
+    justify-content: baseline;
+    flex-direction: column;
+
+    width: calc(100% - 100px);
+    min-height: 80vh;
+}
+
+.searchFilterContainer {
+    display: flex;
+
+    margin: 30px 0 30px 0;
+    
+    padding: 20px 40px 20px 0;
+
+    background-color: #c2c5aa;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
+    .filter {
+        display: flex;
+        align-items: center;
+        justify-content: right;
+
+        margin-right: 10px;
+        height: 50px;
+        width: 20%;
+
+        p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            color: #414833;
+            padding-top: 5px;
+
+            text-align: right;
+
+            .typeIcon {
+                font-size: 45px;
+
+                margin-top: -10px;
+                margin-right: 20px;
+
+                vertical-align: middle;
+            }
+        }
+
+        .petTypeIcon {
+            font-size: 30px;
+            color: #414833;
+
+            margin-left: 5px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .typeDropdown {
+            position: absolute;
+            z-index: 1;
+            background-color: #e3dfd2;
+            box-shadow: #0000003d 0px 3px 8px;
+            padding: 0;
+
+            transform: translateY(80px);
+    
+            .typeDropdownItem {
+                list-style-type: none;
+                text-align: left;
+
+                padding: 10px 20px 10px 20px;
+        
+                font-family: 'Open Sans', sans-serif;
+                font-weight: bold;
+                font-size: 18px;
+                color: #414833;
+        
+                .typeDropdownIcon {
+                    font-size: 22px;
+                    margin-right: 15px;
+                }
+
+                &:hover {
+                    background-color: #d2cebf;
+                }
+            }
+        }
+    }
+
+    .search {
+        width: 100%;
+        margin-left: 10px;
+    }
+    
+}
+
+.data {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    margin-bottom: 30px;
+
+    .databaseWarning {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: bold;
+        font-size: 18px;
+        color: #414833;
+    }
+}
